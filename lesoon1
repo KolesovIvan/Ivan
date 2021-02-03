@@ -1,0 +1,57 @@
+package ru.geekbrains.lesson_1;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Задание №2
+        byte a1 = 127;
+        short b1 = 128;
+        int c1 = 129;
+        long d1 = 129L;
+        float e1 = 101.99f;
+        double f1 = 101.99;
+        char ch = 'I';
+        String helloworld = "Hello, world!";
+
+        // Задание №3
+        float a = 1f;
+        float b = 2f;
+        float c = 3f;
+        float d = 4f;
+        System.out.println("Задание №3 : " + (a * (b + (c / d))));
+
+        // Задание №4
+        int a2 = 7;
+        int b2 = 8;
+        int c2 = a2 + b2;
+        boolean bb = 10 < c2;
+        boolean bb1 = 20 > c2;
+        boolean bb2 = bb && bb1;
+        System.out.println("Задание №4 : " + bb2);
+
+        // Задание №5
+        int a3 = 1;
+        boolean bb3 = a3 >= 0;
+        if (bb3) {
+            System.out.println("Задание №5 : положительное число");
+        } else {
+            System.out.println("Задание №5 : отрицательное число");
+        }
+
+
+        // Задание №6
+        int a4 = -1;
+        boolean bb4 = a4 >= 0;
+        boolean bb5 = !bb4;
+        System.out.println("Задание №6 : " + bb4);
+
+        // Задание №7
+        String a7 = "Иван Колесов";
+        System.out.println("Задание №7 : " + ("Привет " + a7));
+
+    }
+    // Задание №8
+    public static boolean doTask8 (int year) {
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 ==0;
+    }
+}
