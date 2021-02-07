@@ -1,0 +1,74 @@
+package ru.geekbrains.lesson_3;
+
+import java.util.Arrays;
+import java.util.Objects; 
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        GuessTheWord();
+    }
+// Задание номер 1
+    public static void GuessTheNumber(){
+        Scanner in = new Scanner(System.in);
+
+        int a, n = (int)(Math.random()*10);
+        System.out.println("Угадайте число с 3 попыток. Число от 0 до 9");
+        for (int i = 0; i < 3; i++){
+            System.out.println("Попытка " + (i+1) + ": ");
+            a = in.nextInt();
+            if (a < n) System.out.println("Число больше.");
+            if (a > n) System.out.println("Число меньше.");
+            if (a == n) {System.out.println("Вы угадали.");
+                System.out.println("Попробуем еще раз? 1 – да / 0 – нет");
+                a = in.nextInt();
+                if (a == 1) GuessTheNumber();
+                else {System.out.println("Спасибо за игру.");
+                    break;
+                }
+            }
+        }
+        System.out.println("Вы не угадали.");
+        System.out.println("Попробуем еще раз? 1 – да / 0 – нет");
+        a = in.nextInt();
+        if (a == 1) GuessTheNumber();
+        else {System.out.println("Спасибо за игру.");
+        }
+    }
+    // Задание номер 2
+
+    public static void GuessTheWord() {
+        Scanner in = new Scanner(System.in);
+        String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+        String selectedWord = words[(int)Math.floor(Math.random()*words.length)];
+        System.out.println("Угадайте одну из этих слов:");
+        System.out.println(Arrays.toString(words));
+        String Guess;
+        StringBuilder lettersInPlace;
+        do {
+            System.out.println("Выбкрите слово?");
+            Guess = in.nextLine();
+            if (Objects.equals(Guess, selectedWord)) {
+                System.out.println("Вы угадали.");
+
+            } else {
+                lettersInPlace = new StringBuilder("###############");
+                int shortestWordLenght;
+                if (selectedWord.length()<Guess.length()) {
+                    shortestWordLenght = selectedWord.length();
+                } else {
+                    shortestWordLenght = Guess.length();
+                }
+                for (int i=0;i<shortestWordLenght;i++){
+                    if (Guess.charAt(i)== selectedWord.charAt(i)) {
+                        lettersInPlace.setCharAt(i,Guess.charAt(i));
+                    }
+                }
+                System.out.println("Вы не угадали. Но есть совпадение букв:");
+                System.out.println(lettersInPlace);
+                System.out.println("Попробуйте еще раз. Количество # не указывает на размер слова.");
+            }
+        } while (!Objects.equals(Guess, selectedWord));
+    }
+}
