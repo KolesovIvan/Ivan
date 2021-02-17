@@ -1,0 +1,51 @@
+package ru.geekbrains.lesson_5;
+
+class Employee {
+
+    private String fio;
+    private String post;
+    private String email;
+    private String tel;
+    private double salary;
+    private int age;
+
+    Employee(String fio, String post, String email, String tel, double salary, int age) {
+        this.fio = fio;
+        this.post = post;
+        this.email = email;
+        this.tel = tel;
+        this.salary = salary;
+        if(age >= 18) {
+            this.age = age;
+        } else {
+            System.out.println();
+        }
+    }
+
+    int GetAge() {
+        return age;
+    }
+
+    void Show() {
+        System.out.println(fio + " " + post + " " +  email + " " + tel + " " + salary + " " + age);
+    }
+}
+
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Employee[] persArray = new Employee[5];
+        persArray[0] = new Employee("Ivanov Ivan", "Engineer", "ivivan@mail.ru", "89998887766", 30000, 30);
+        persArray[1] = new Employee("Jone Jones", "Engineer1", "jojo@mail.ru", "89998887765", 35000, 35);
+        persArray[2] = new Employee("Ian Goon", "Engineer2", "iangoon@mail.ru", "89998887764", 40000, 40);
+        persArray[3] = new Employee("Gans Vans", "Engineer3", "gava@mail.ru", "89998887763", 45000, 45);
+        persArray[4] = new Employee("Han Hansen", "Engineer4", "haha@mail.ru", "89998887762", 50000, 50);
+
+        for(Employee item : persArray) {
+            if(item.GetAge() > 40) item.Show();
+        }
+    }
+}
