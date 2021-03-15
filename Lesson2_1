@@ -1,0 +1,164 @@
+Извините что просто списал с 2го урока посто еле как успел. Но я все понял. :)
+
+package ru.geekbrains.lesson2_1;
+
+import ru.geekbrains.lesson2_1.Obstacle.Obstacle;
+import ru.geekbrains.lesson2_1.Obstacle.RunningRoad;
+import ru.geekbrains.lesson2_1.Obstacle.Wall;
+import ru.geekbrains.lesson2_1.participant.Cat;
+import ru.geekbrains.lesson2_1.participant.Human;
+import ru.geekbrains.lesson2_1.participant.Participant;
+import ru.geekbrains.lesson2_1.participant.Robot;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Participant[] participants = {
+                new Cat(50, 300),
+                new Human(10, 200),
+                new Robot(100, 400)
+        };
+        Obstacle[] obstacles = {new Wall(250), new RunningRoad(40)};
+
+        for (int i = 0; i < obstacles.length; i++) {
+            for (int j = 0; j < participants.length; j++) {
+                System.out.println(obstacles[i].doIt(participants[j]));
+            }
+        }
+    }
+}
+
+package ru.geekbrains.lesson2_1.participant;
+
+public interface Participant {
+}
+
+package ru.geekbrains.lesson2_1.participant;
+
+public interface Jumpuble {
+    boolean jump(int distance);
+}
+package ru.geekbrains.lesson2_1.participant;
+
+public interface Runnuble {
+    boolean run(int distance);
+}
+package ru.geekbrains.lesson2_1.participant;
+
+public class Cat implements Participant, Jumpuble, Runnuble {
+    private final int maxJumpDistance;
+    private final int maxRunDistance;
+
+    public Cat(int maxJumpDistance, int maxRunDistance) {
+        this.maxJumpDistance = maxJumpDistance;
+        this.maxRunDistance = maxRunDistance;
+    }
+
+    @Override
+    public boolean jump(int distance) {
+        System.out.println("Cat attempts jump");
+        return maxJumpDistance >= distance;
+    }
+
+    @Override
+    public boolean run(int distance) {
+        System.out.println("Cat attempts run");
+        return maxRunDistance >= distance;
+    }
+}
+package ru.geekbrains.lesson2_1.participant;
+
+public class Human implements Participant, Jumpuble, Runnuble {
+    private final int maxJumpDistance;
+    private final int maxRunDistance;
+
+    public Human(int maxJumpDistance, int maxRunDistance) {
+        this.maxJumpDistance = maxJumpDistance;
+        this.maxRunDistance = maxRunDistance;
+    }
+
+    @Override
+    public boolean jump(int distance) {
+        System.out.println("Human attempts jump");
+        return maxJumpDistance >= distance;
+    }
+
+    @Override
+    public boolean run(int distance) {
+        System.out.println("Human attempts run");
+        return maxRunDistance >= distance;
+    }
+}
+package ru.geekbrains.lesson2_1.participant;
+
+public class Robot implements Participant, Jumpuble, Runnuble {
+    private final int maxJumpDistance;
+    private final int maxRunDistance;
+
+    public Robot(int maxJumpDistance, int maxRunDistance) {
+        this.maxJumpDistance = maxJumpDistance;
+        this.maxRunDistance = maxRunDistance;
+    }
+
+    @Override
+    public boolean jump(int distance) {
+        System.out.println("Robot attempts jump");
+        return maxJumpDistance >= distance;
+    }
+
+    @Override
+    public boolean run(int distance) {
+        System.out.println("Robot attempts run");
+        return maxRunDistance >= distance;
+    }
+}
+package ru.geekbrains.lesson2_1.Obstacle;
+
+import ru.geekbrains.lesson2_1.participant.Participant;
+
+public interface Obstacle {
+    boolean doIt(Participant participant);
+}
+package ru.geekbrains.lesson2_1.Obstacle;
+
+import ru.geekbrains.lesson2_1.participant.Jumpuble;
+import ru.geekbrains.lesson2_1.participant.Participant;
+
+public class Wall implements Obstacle{
+    private final int heigth;
+
+    public Wall(int heigth) {
+        this.heigth = heigth;
+    }
+
+    @Override
+    public boolean doIt(Participant participant) {
+        if (participant instanceof Jumpuble) {
+            return ((Jumpuble) participant).jump(heigth);
+        }
+        System.out.println(" Participant can not jump ");
+        return false;
+    }
+}
+package ru.geekbrains.lesson2_1.Obstacle;
+
+import ru.geekbrains.lesson2_1.participant.Participant;
+import ru.geekbrains.lesson2_1.participant.Runnuble;
+
+public class RunningRoad implements Obstacle{
+    private final int width;
+
+    public RunningRoad(int width) {
+        this.width = width;
+    }
+
+    @Override
+    public boolean doIt(Participant participant) {
+        if (participant instanceof Runnuble) {
+            return ((Runnuble) participant).run(width);
+        }
+        System.out.println(" Participant can not run ");
+        return false;
+    }
+}
